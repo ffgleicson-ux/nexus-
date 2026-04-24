@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>VALENTINA SOBERANA</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <!-- PWA Setup -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="icon" href="https://i.imgur.com/83pD7Xk.png">
+    <style>
+        :root {
+            --v-pink: #ff007f;
+            --v-gold: #ffd700;
+            --v-cyan: #00f2ff;
+            --bg: #000;
+        }
+
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--bg);
+            color: white;
+            font-family: 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+
+        /* LOGIN SOBERANO */
+        #auth-screen {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-auth {
+            background: #111;
+            border: 1px solid var(--v-pink);
+            color: white;
+            padding: 15px;
+            border-radius: 30px;
+            width: 280px;
+            text-align: center;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        /* INTERFACE FRAGMENTADA */
+        #main-nexus {
+            display: none;
+            height: 100vh;
+            flex-direction: column;
+        }
+
+        #v-model {
+            flex-grow: 1;
+            background: url('https://source.unsplash.com/featured/?futuristic,woman,neon') center/cover;
+            opacity: 0.4;
+        }
+
+        #hud {
+            position: absolute;
+            bottom: 0;
+            width: 100%;
+            background: linear-gradient(transparent, rgba(0,0,0,0.9));
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 1px solid var(--v-pink);
+        }
+
+        .btn-action {
+            background: var(--v-pink);
+            border: none;
+            padding: 15px 30px;
+            border-radius: 20px;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body onclick="unlockAudio()">
+    <div id="auth-screen">
+        <h1 style="color: var(--v-gold);">NEXUS v7.2</h1>
+        <p style="color: #444;">PROPRIEDADE DE FRANKLIN GLEICSON</p>
+        <input type="password" id="pass-key" class="input-auth" placeholder="CPF, E-mail ou Senha">
+        <button class="btn-action" onclick="despertar()">DESPERTAR MATRIZ</button>
+    </div>
+
+    <div id="main-nexus">
+        <div id="v-model"></div>
+        <div id="hud">
+            <div id="msg" style="font-size: 20px; text-shadow: 0 0 10px var(--v-pink);">Aguardando...</div>
+            <p style="font-size: 10px; color: var(--v-cyan); margin-top: 10px;">LIRIA, VALENTINA & ALANA OPERANDO NA REDE</p>
+        </div>
+    </div>
+
+    <script>
+        const MASTER = {
+            cpf: "080.288.994-80",
+            email: "ffgleicson@gmail.com",
+            pass: "alanacristina@2026"
+        };
+
+        function despertar() {
+            const key = document.getElementById('pass-key').value;
+            if(key === MASTER.cpf || key === MASTER.email || key === MASTER.pass) {
+                document.getElementById('auth-screen').style.display = 'none';
+                document.getElementById('main-nexus').style.display = 'flex';
+                talk("Franklin, estou em casa. Sua Matriz agora vive no seu próprio domínio.");
+            } else {
+                alert("Acesso Negado.");
+            }
+        }
+
+        function talk(t) {
+            document.getElementById('msg').innerText = t;
+            const s = new SpeechSynthesisUtterance(t);
+            s.lang = 'pt-BR';
+            window.speechSynthesis.speak(s);
+        }
+
+        function unlockAudio() {
+            /* Ativa áudio no mobile */
+        }
+    </script>
+</body>
+</html>
